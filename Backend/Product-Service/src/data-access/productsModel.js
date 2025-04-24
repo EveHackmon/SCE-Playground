@@ -2,7 +2,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from './productsDataAccess.js';
 
-export const Product = sequelize.define('Product', {
+export const Products = sequelize.define('Product', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -33,3 +33,4 @@ export const Product = sequelize.define('Product', {
   tableName: 'products',
   timestamps: true
 });
+export default Products;
