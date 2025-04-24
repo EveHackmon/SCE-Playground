@@ -11,5 +11,14 @@ export const productsService = {
       console.error('Error fetching products:', err);
       throw new Error('Failed to fetch products');
     }
+  }, 
+  async fetchProduct(input) {
+    try {
+      const products = await Products.findOne(input);
+      return products;
+    } catch (err) {
+      console.error('Error fetching the product:', err);
+      throw new Error('Failed to fetch the product');
+    }
   }
 };
