@@ -1,6 +1,6 @@
 // products-service/src/services/productsService.js
 
-import { Products } from '../data-access/productsModel.js';
+import { Product } from '../data-access/productsModel.js';
 
 export const productsService = {
   async fetchAllProducts() {
