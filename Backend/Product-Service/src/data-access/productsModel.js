@@ -28,9 +28,13 @@ export const Products = sequelize.define('Product', {
   datasheet_url: {
     type: DataTypes.TEXT,
     allowNull: true
-  }
+  },
+  created_at: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW, // הגדרת ברירת מחדל כזמן הנוכחי
+    allowNull: false
+  },
 }, {
   tableName: 'products',
-  timestamps: true
 });
 export default Products;
