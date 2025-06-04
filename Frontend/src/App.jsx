@@ -1,7 +1,7 @@
 // frontend/src/App.jsx
-import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useContext, useEffect } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -21,9 +21,11 @@ import ReportsPage from './pages/ReportsPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import EditProductPage from './pages/UpdateProductPage.jsx';
 import LeadsPage from './pages/LeadsPage.jsx';
+import LeadsGeneration from './pages/LeadsGeneration.jsx';
+import LeadManager from './pages/LeadManager.jsx';
 
 function Navbar() {
-  const { user, signOut } = useContext(StoreContext);
+  const { user, signOut, isLoading, isValidating } = useContext(StoreContext);
   const navigate = useNavigate();
 
   function signUserOut() {
@@ -31,7 +33,6 @@ function Navbar() {
     navigate('/signin');
   }
 
-  // If user exists, create an initial
   const userInitial =
     user && user.firstName
       ? user.firstName[0]
@@ -39,10 +40,25 @@ function Navbar() {
       ? user.email[0]
       : null;
 
+  // While loading/validating, you can show a spinner or skeleton here
+  if (isLoading || isValidating) {
+    return (
+      <div className="navbar">
+        <div className="nav-left">
+          <img
+            className="university-icon"
+            src="https://www.sce.ac.il/ver/14/tpl/website/img/SamiSH-logo_2.png"
+            alt="University Icon"
+          />
+        </div>
+        <div className="nav-right">Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="navbar">
       <div className="nav-left">
-        {/* University icon (replace with your own image path or URL) */}
         <img
           className="university-icon"
           src="https://www.sce.ac.il/ver/14/tpl/website/img/SamiSH-logo_2.png"
@@ -54,12 +70,15 @@ function Navbar() {
         <div className="nav-links">
           <Link to="/">Home</Link>
           {!user ? (
-            <Link to="/signin">Sign In</Link>
+            <div className="nav-links">
+              <Link to="/signin">Sign In</Link>
+              <Link to="/signup">Sign Up</Link>
+              <Link to="/products">Products</Link>
+              <Link to="/createlead">Leads Generation</Link>
+            </div>
           ) : (
             <a onClick={signUserOut}>Sign out</a>
           )}
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/products">Products</Link>
         </div>
         {user && <div className="user-circle">{userInitial}</div>}
       </div>
@@ -81,6 +100,26 @@ function App() {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/products/:id" element={<ProductPage />} />
 
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <HomePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/signin" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route
+              path="/reports"
+              element={
+                <ProtectedRoute>
+                  <ReportsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/createlead" element={<LeadsGeneration />} />
+            <Route path="/lead-manager" element={<LeadManager />} />
             <Route
               path="/products/update-product/:id"
               element={

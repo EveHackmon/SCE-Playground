@@ -31,13 +31,18 @@ export default function SignUpPage() {
       await api.post('/auth/signup', form);
 
       // 2) Sign in automatically
-      const { data } = await api.post('/auth/signin', {
+      const res = await api.post('/auth/signin', {
         email: form.email,
         password: form.password
       });
-
-      signIn({ email: form.email, firstName: form.firstName }, data.token);
-      navigate('/products');
+      console.log('Sign in response:', JSON.stringify(res)); 
+      if (!res.data || !res.data.token) {
+        setError('Sign in failed');
+        return;
+      }
+      // 3) Store user data and token in context
+      signIn({ email: form.email, firstName: form.firstName }, res.data.token);
+      navigate('/'); // Navigate to home page after successful sign up
     } catch (err) {
       setError(err.response?.data?.message || 'Sign up failed');
     } finally {

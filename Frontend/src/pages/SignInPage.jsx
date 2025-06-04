@@ -30,29 +30,6 @@ export default function SignInPage() {
     }
   }
 
-  useEffect(() => {
-    if (!token) return;
-    const validateToken = async () => {
-      try {
-        const { data } = await api.post('/auth/validate-token', { token });
-        if (data?.isValid) {
-          console.log('Token is valid, user is already logged in');
-          navigate('/');
-          return;
-        }
-      } catch (err) {
-        console.error('Token validation failed:', err);
-      }
-
-      console.log(
-        'Token is invalid or not present, redirecting to sign-in page'
-      );
-      signOut();
-    };
-
-    validateToken();
-  }, [token, navigate, signOut]);
-
   return (
     <div className="auth-container">
       {/* LOADER – sits above everything else when active */}
@@ -68,7 +45,7 @@ export default function SignInPage() {
         alt="University Icon"
       />
 
-      <h3>Sign In</h3>
+      <h3 style={{ color: '#000' }}>Sign In</h3>
       {error && <p className="error-message">{error}</p>}
       <form className="auth-form" onSubmit={handleSubmit}>
         <input

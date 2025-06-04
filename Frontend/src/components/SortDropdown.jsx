@@ -1,41 +1,42 @@
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import './buttons.css';
 import { useState } from 'react';
+import {
+  sortById,
+  sortPriceHighToLow,
+  sortPriceLowToHigh,
+  sortLeadsHighToLow,
+  sortLeadsLowToHigh,
+} from '../utils/sortUtils';
 
 function SortDropdown(props) {
   const [selectedSort, setSelectedSort] = useState('Sort by');
 
   function displayNormal() {
-    const sorted = [...props.productsToSort].sort((a, b) => a.id - b.id);
+    const sorted = sortById(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Sort by');
   }
   function sortHighToLow() {
-    const sorted = [...props.productsToSort].sort((a, b) => b.price - a.price);
+    const sorted = sortPriceHighToLow(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Price: High to Low');
   }
 
   function sortLowToHigh() {
-    const sorted = [...props.productsToSort].sort((a, b) => a.price - b.price);
+    const sorted = sortPriceLowToHigh(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Price: Low to High');
   }
 
   function sortLeadsHighToLow() {
-    console.log(props.displayedProducts);
-    const sorted = [...props.productsToSort].sort(
-      (a, b) => b.lead_count - a.lead_count
-    );
+    const sorted = sortLeadsHighToLow(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Leads: High to Low');
   }
 
   function sortLeadsLowToHigh() {
-    const sorted = [...props.productsToSort].sort(
-      (a, b) => a.lead_count - b.lead_count
-    );
+    const sorted = sortLeadsLowToHigh(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Leads: Low to High');
   }

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Accordion, Card, Button, Offcanvas, Form } from 'react-bootstrap';
 import RangeSlider from './RangeSlider';
+import { filterProducts } from '../utils/filterUtils';
 import './buttons.css';
 
 const FilterOffcanvas = ({
@@ -64,27 +65,7 @@ const FilterOffcanvas = ({
   };
 
   const handleApply = () => {
-    const { category, minPrice, maxPrice, minLeadCount, maxLeadCount } =
-      filters;
-
-    let filtered = [...displayedProducts];
-
-    if (category.length > 0) {
-      filtered = filtered.filter((product) =>
-        filters.category.includes(product.category)
-      );
-    }
-
-    filtered = filtered.filter(
-      (product) =>
-        product.price >= Number(minPrice) && product.price <= Number(maxPrice)
-    );
-
-    filtered = filtered.filter(
-      (product) =>
-        product.lead_count >= Number(minLeadCount) &&
-        product.lead_count <= Number(maxLeadCount)
-    );
+    const filtered = filterProducts(displayedProducts, filters);
     setFiltersOn(true);
     setFilteredProducts(filtered);
     handleClose();

@@ -23,6 +23,7 @@ export async function signup(req, res, next) {
 export async function signin(req, res, next) {
   try {
     const { email, password } = req.body;
+    console.log('Got signin request: ', email, ' and password: ', password);
     const userAndToken = await authService.signin(email, password);
     return res.status(200).json(userAndToken);
   } catch (error) {

@@ -81,18 +81,22 @@ export default function ProductsPage() {
         </div>
       )}
       <div className="display-buttons-wrapper">
-        <h2 className="products-page-title">Products</h2>
-        <div className="display-buttons">
-          <FilterSortSearch
-            allProducts={allProducts}
-            displayedProducts={displayedProducts}
-            filteredProducts={filteredProducts}
-            setFiltersOn={setFiltersOn}
-            setDisplayedProducts={setDisplayedProducts}
-            setFilteredProducts={setFilteredProducts}
-            setLastSearchTerm={setLastSearchTerm}
-            isAdmin={user?.email === 'admin@gmail.com'}
-          />
+        <div>
+          <h2 className="products-page-title" style={{ paddingBottom: '2rem' }}>
+            Products
+          </h2>
+          <div className="display-buttons">
+            <FilterSortSearch
+              allProducts={allProducts}
+              displayedProducts={displayedProducts}
+              filteredProducts={filteredProducts}
+              setFiltersOn={setFiltersOn}
+              setDisplayedProducts={setDisplayedProducts}
+              setFilteredProducts={setFilteredProducts}
+              setLastSearchTerm={setLastSearchTerm}
+              isAdmin={user?.email === 'admin@gmail.com'}
+            />
+          </div>
         </div>
       </div>
 

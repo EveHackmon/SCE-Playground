@@ -2,6 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import './buttons.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useState } from 'react';
+import { searchProducts } from '../utils/searchUtils';
 
 function Search(props) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,19 +12,10 @@ function Search(props) {
     setSearchTerm(value);
   };
 
-  function search(searchTerm) {
-    searchTerm = String(searchTerm).toLowerCase();
-    const searched = [...props.allProducts].filter(
-      (product) =>
-        product.name.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm)
-    );
+  const handleSearchClick = () => {
+    const results = searchProducts(props.allProducts, searchTerm);
     props.setFilteredProducts([]);
-    props.setDisplayedProducts(searched);
-  }
-
-  const handleSearchClick = (e) => {
-    search(searchTerm);
+    props.setDisplayedProducts(results);
     props.setLastSearchTerm(searchTerm);
     setSearchTerm('');
   };
@@ -31,8 +23,7 @@ function Search(props) {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim() !== '') {
-      search(searchTerm);
-      setSearchTerm('');
+      handleSearchClick();
     }
   };
 

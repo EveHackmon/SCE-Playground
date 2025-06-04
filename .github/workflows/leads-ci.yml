@@ -1,0 +1,56 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Leads_Workflow CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'Backend/LeadsService/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'Backend/LeadsService/**'
+
+jobs:
+  build-and-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18.x
+        cache: 'npm'
+        cache-dependency-path: 'Backend/LeadsService/package-lock.json' 
+
+    - name: Install dependencies
+      working-directory: Backend/LeadsService
+      run: npm install
+           npm install --save-dev jest
+           npm install eslint@8.35.0 --save-dev
+           npm install express cors dotenv pg
+
+
+
+    - name: Run tests
+      working-directory: Backend/LeadsService
+      env:
+        DB_CONNECTION_STRING: postgresql://leadsuser:4fXzPHnmfMLJuTIGQRGrtm4FGjd6WdOu@dpg-d03istqdbo4c738e7ggg-a.oregon-postgres.render.com/leadsdb_desk
+      run: npm run test
+
+
+    - name: Run linter
+      working-directory: Backend/LeadsService
+      run: npm run lint
+  deploy-server:
+      needs: build-and-test
+      runs-on: ubuntu-latest
+      steps:
+        - name: activate deploy hook
+          run: curl -X POST "https://api.render.com/deploy/srv-d05369je5dus738s2hk0?key=l84BcZh22zQ"
+            
+    
