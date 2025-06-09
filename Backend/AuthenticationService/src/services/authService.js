@@ -21,7 +21,7 @@ export const authService = {
       email,
       password: hashedPassword,
       firstName,
-      lastName,
+      lastName
     });
 
     // Return user without password
@@ -29,7 +29,7 @@ export const authService = {
       id: user.id,
       email: user.email,
       firstName: user.firstName,
-      lastName: user.lastName,
+      lastName: user.lastName
     };
   },
 
@@ -56,7 +56,7 @@ export const authService = {
         id: user.id,
         email: user.email,
         firstName: user.firstName,
-        lastName: user.lastName,
+        lastName: user.lastName
       },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
@@ -68,9 +68,9 @@ export const authService = {
         id: user.id,
         email: user.email,
         firstName: user.firstName,
-        lastName: user.lastName,
+        lastName: user.lastName
       },
-      token,
+      token
     };
   },
 
@@ -90,5 +90,5 @@ export const authService = {
       throw err;
     }
     await User.destroy({ where: { email } });
-  },
+  }
 };

@@ -1,12 +1,8 @@
-<<<<<<< HEAD
-=======
 // tests/HomePage.test.jsx
->>>>>>> 2e676cd2042be2ad73ea73cea0baeb69e2162d0b
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { StoreProvider } from '../src/store/StoreContext'; 
 
 import HomePage from '../src/pages/HomePage.jsx';
 import { StoreContext } from '../src/store/StoreContext.jsx';

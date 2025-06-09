@@ -3,9 +3,15 @@ import { authService } from '../services/authService.js';
 
 export async function signup(req, res, next) {
   try {
-    const { email, password, firstName, lastName } = req.body;
+    const {
+      email,
+      password,
+      firstName,
+      lastName
+    } = req.body;
 
     console.log('Got signup request: ', email, ' and password: ', password);
+    
 
     const newUser = await authService.signup(
       email,
