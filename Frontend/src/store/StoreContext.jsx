@@ -79,6 +79,8 @@ export function StoreProvider({ children }) {
     token,
     signIn,
     signOut,
+    isLoading,
+    isValidating,
   };
 
   return (
