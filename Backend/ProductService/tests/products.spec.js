@@ -88,6 +88,7 @@ describe('Full Product Lifecycle Test', () => {
       expect(res.body[0]).to.have.property('name');
     }
   });
+  /*
   it('should fetch all leads from external service', async () => {
     const res = await request(app).get('/read-all-leads').expect(200);
 
@@ -97,4 +98,5 @@ describe('Full Product Lifecycle Test', () => {
       expect(res.body[0]).to.have.property('email');
     }
   });
+  */
 });

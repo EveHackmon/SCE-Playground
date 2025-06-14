@@ -1,4 +1,5 @@
 // authentication-service/src/index.js
+//
 import 'dotenv/config';
 import express, { json } from 'express';
 import Routes from './routes/productsRoutes.js';

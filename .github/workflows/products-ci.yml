@@ -38,7 +38,7 @@ jobs:
           cd Backend/ProductService
           npm test
         env:
-          POSTGRES_URI: ${{ secrets.POSTGRES_URI }}
+          POSTGRES_URI: postgresql://products_database_v2qd_user:IbLcEXHC97JzXcs0L6UJcpLip6sPKWmQ@dpg-d0jj6lmmcj7s7382ufmg-a.frankfurt-postgres.render.com/products_database_v2qd
 
   deploy-to-render:
     runs-on: ubuntu-latest
