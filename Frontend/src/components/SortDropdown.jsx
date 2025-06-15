@@ -29,13 +29,13 @@ function SortDropdown(props) {
     setSelectedSort('Price: Low to High');
   }
 
-  function sortLeadsHighToLow() {
+  function handleSortLeadsHighToLow() {
     const sorted = sortLeadsHighToLow(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Leads: High to Low');
   }
 
-  function sortLeadsLowToHigh() {
+  function handleSortLeadsLowToHigh() {
     const sorted = sortLeadsLowToHigh(props.productsToSort);
     props.setProductsToSort(sorted);
     setSelectedSort('Leads: Low to High');
@@ -57,10 +57,10 @@ function SortDropdown(props) {
         </Dropdown.Item>
         {props.isAdmin && (
           <>
-            <Dropdown.Item onClick={sortLeadsHighToLow}>
+            <Dropdown.Item onClick={handleSortLeadsHighToLow}>
               Leads: High to Low
             </Dropdown.Item>
-            <Dropdown.Item onClick={sortLeadsLowToHigh}>
+            <Dropdown.Item onClick={handleSortLeadsLowToHigh}>
               Leads: Low to High
             </Dropdown.Item>
           </>

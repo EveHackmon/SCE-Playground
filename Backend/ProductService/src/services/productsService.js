@@ -57,7 +57,7 @@ export const productsService = {
       await ProductsImages.destroy({
         where: { product_id: productId },
       });
-
+      console.log(updateData);
       for (const url of extra_images) {
         await ProductsImages.create({
           product_id: productId,

@@ -151,7 +151,7 @@ function AddProductForm({
 
   return (
     <Container style={{ maxWidth: '600px', color: 'black', fontSize: '12px' }}>
-      <h2>Add New Product</h2>
+      {/* <h2>Add New Product</h2> */}
 
       {success && <Alert variant="success">{success}</Alert>}
       {error && <Alert variant="danger">{error}</Alert>}

@@ -42,8 +42,8 @@ export default function EditProductPage(product) {
       alert('המוצר עודכן בהצלחה!');
       navigate(`/products/${id}`);
     } catch (err) {
-      console.error('שגיאה בעדכון המוצר', err);
-      alert('שגיאה בעדכון המוצר');
+      // console.error('שגיאה בעדכון המוצר', err);
+      // alert('שגיאה בעדכון המוצר');
     }
   };
 
@@ -53,11 +53,11 @@ export default function EditProductPage(product) {
 
   return (
     <Container style={{ maxWidth: '600px', marginTop: '2rem' }}>
-      <h2 className="text-center">עריכת מוצר</h2>
+      <h2 className="text-center">Edit Product</h2>
       {formData ? (
         <AddProductForm initialData={formData} onSubmit={handleUpdate} />
       ) : (
-        <p>טוען נתוני מוצר...</p>
+        <p>Loading...</p>
       )}
     </Container>
   );
